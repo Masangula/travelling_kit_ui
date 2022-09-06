@@ -24,60 +24,63 @@ class CategoryPageView extends GetView<CategoryPageController> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 24,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: TextField(
-              decoration: InputDecoration(
-                fillColor: ApplicationColors.textfieldBackgroundColor,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                hintText: 'Search destination',
-                hintStyle: Get.theme.textTheme.caption!.copyWith(fontSize: 16),
-                suffixIcon: Icon(
-                  Icons.search,
-                  color: Get.theme.colorScheme.onSurface,
-                  size: 24,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextField(
+                style: Get.theme.textTheme.caption,
+                decoration: InputDecoration(
+                  fillColor: ApplicationColors.textfieldBackgroundColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  hintText: 'Search destination',
+                  hintStyle: Get.theme.textTheme.caption!.copyWith(fontSize: 16),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Get.theme.colorScheme.onSurface,
+                    size: 24,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: SizedBox(
-              height: 56,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: Category.categoriesList.length,
-                itemBuilder: (context, index) {
-                  Category category = Category.categoriesList[index];
-                  return buildCategoryItem(
-                    category.categoryName,
-                    category.imageUrl,
-                  );
-                },
-              ),
+            const SizedBox(
+              height: 30,
             ),
-          ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: Place.listOfPlaceToBeVisited.length,
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: SizedBox(
+                height: 56,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: Category.categoriesList.length,
                   itemBuilder: (context, index) {
-                    Place place = Place.listOfPlaceToBeVisited[index];
-                    return buildVisitingPlaceIListItem(
-                        place.name, place.description, place.imageUrl);
-                  }))
-        ],
+                    Category category = Category.categoriesList[index];
+                    return buildCategoryItem(
+                      category.categoryName,
+                      category.imageUrl,
+                    );
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: Place.listOfPlaceToBeVisited.length,
+                    itemBuilder: (context, index) {
+                      Place place = Place.listOfPlaceToBeVisited[index];
+                      return buildVisitingPlaceIListItem(
+                          place.name, place.description, place.imageUrl);
+                    }))
+          ],
+        ),
       ),
     );
   }
@@ -86,11 +89,12 @@ class CategoryPageView extends GetView<CategoryPageController> {
       String name, String description, String imageUrl) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-        vertical: 20,
+        horizontal: 15,
+        vertical: 10,
       ),
       child: Container(
         height: 155,
+        width: Get.width*0.9,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -113,8 +117,8 @@ class CategoryPageView extends GetView<CategoryPageController> {
               width: 14,
             ),
             Container(
-              alignment: Alignment.center,
-              width: Get.width*0.52,
+              alignment: Alignment.centerLeft,
+              width: Get.width * 0.53,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -122,11 +126,15 @@ class CategoryPageView extends GetView<CategoryPageController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        name,
-                        textAlign: TextAlign.left,
-                        style: Get.theme.textTheme.button,
-                        softWrap: true,
+                      Container(
+                        width: Get.width * 0.26,
+                        alignment: Alignment.center,
+                        child: Text(
+                          name,
+                          textAlign: TextAlign.left,
+                          style: Get.theme.textTheme.button,
+                          softWrap: true,
+                        ),
                       ),
                       const IconButton(
                         onPressed: null,

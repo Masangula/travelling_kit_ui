@@ -6,9 +6,11 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const CATEGORY_PAGE = _Paths.CATEGORY_PAGE;
+  static const PLACE_PROFILE = _Paths.PLACE_PROFILE;
 }
 
 abstract class _Paths {
   _Paths._();
   static const CATEGORY_PAGE = '/category-page';
+  static const PLACE_PROFILE = '/place-profile';
 }
