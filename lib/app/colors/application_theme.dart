@@ -51,13 +51,14 @@ class ApplicationTheme {
       color: ApplicationColors.greyWordsColor,
       size: 20,
     ),
-    textTheme: const TextTheme(
-      headline2: TextStyle(
+    textTheme:   TextTheme(
+      headline2: const TextStyle(
         fontFamily: 'Urbanist',
         fontSize: 20,
         fontWeight: FontWeight.w700,
+
       ),
-      headline6: TextStyle(
+      headline6: const TextStyle(
         fontFamily: 'Urbanist',
         fontSize: 18,
         fontWeight: FontWeight.w600,
@@ -66,24 +67,25 @@ class ApplicationTheme {
         fontFamily: 'Urbanist',
         fontSize: 14,
         fontWeight: FontWeight.w500,
+        color: lightThemeColorScheme.onSurface,
       ),
-      button: TextStyle(
+      button: const TextStyle(
         fontFamily: 'Urbanist',
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),
-      caption: TextStyle(
+      caption: const TextStyle(
         fontFamily: 'Urbanist',
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: ApplicationColors.greyWordsColor,
       ),
-      bodyText1: TextStyle(
+      bodyText1: const TextStyle(
         fontFamily: 'Urbanist',
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
-      headline1: TextStyle(
+      headline1: const TextStyle(
           fontFamily: 'Urbanist',
           fontSize: 16,
           fontWeight: FontWeight.w500,

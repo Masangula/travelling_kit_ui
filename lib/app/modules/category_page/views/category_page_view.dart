@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
 import 'package:travelling_kit_ui/app/colors/application_colors.dart';
@@ -101,8 +100,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
           ),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -114,57 +112,57 @@ class CategoryPageView extends GetView<CategoryPageController> {
             const SizedBox(
               width: 14,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 75,
-                      child: Text(
+            Container(
+              alignment: Alignment.center,
+              width: Get.width*0.52,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
                         name,
                         textAlign: TextAlign.left,
                         style: Get.theme.textTheme.button,
                         softWrap: true,
                       ),
-                    ),
-                    const IconButton(
-                      onPressed: null,
-                      icon: Icon(
-                        Icons.favorite_border_outlined,
+                      const IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.favorite_border_outlined,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '\$245,00',
-                  style: Get.theme.textTheme.headline1,
-                ),
-                Row(
-                  children: [
-                    buildRatingStar(ApplicationColors.orangePrimaryColor),
-                    buildRatingStar(ApplicationColors.orangePrimaryColor),
-                    buildRatingStar(ApplicationColors.orangePrimaryColor),
-                    buildRatingStar(ApplicationColors.orangePrimaryColor),
-                    buildRatingStar(ApplicationColors.greyWordsColor),
-                    Text(
-                      '4.8',
-                      style: Get.theme.textTheme.bodyText2,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 160,
-                  child: Text(
+                    ],
+                  ),
+                  Text(
+                    '\$245,00',
+                    style: Get.theme.textTheme.headline1,
+                  ),
+                  Row(
+                    children: [
+                      buildRatingStar(ApplicationColors.orangePrimaryColor),
+                      buildRatingStar(ApplicationColors.orangePrimaryColor),
+                      buildRatingStar(ApplicationColors.orangePrimaryColor),
+                      buildRatingStar(ApplicationColors.orangePrimaryColor),
+                      buildRatingStar(ApplicationColors.greyWordsColor),
+                      Text(
+                        '4.8',
+                        style: Get.theme.textTheme.bodyText2,
+                      ),
+                    ],
+                  ),
+                  Text(
                     description,
                     style: Get.theme.textTheme.caption,
                     maxLines: 2,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
+                    softWrap: true,
+                  )
+                ],
+              ),
             )
           ],
         ),
