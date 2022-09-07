@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 import 'package:get/get.dart';
 import 'package:travelling_kit_ui/app/colors/application_colors.dart';
@@ -80,9 +81,53 @@ See beautiful Bali and help us keep it that way by joining this EcoTour of a Bal
               buildSizedBox(30),
               buildHeadlines('Location'),
               buildSizedBox(24),
-              SizedBox(
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 height: 160,
-                width: Get.width * 0.8,
+                width: Get.width * 0.9,
+                child: OSMFlutter(
+                  controller: controller.mapController,
+                  trackMyPosition: false,
+                  initZoom: 12,
+                  minZoomLevel: 8,
+                  maxZoomLevel: 14,
+                  stepZoom: 1.0,
+                  userLocationMarker: UserLocationMaker(
+                    personMarker: const MarkerIcon(
+                      icon: Icon(
+                        Icons.location_history_rounded,
+                        color: ApplicationColors.redSecondaryColor,
+                        size: 48,
+                      ),
+                    ),
+                    directionArrowMarker: const MarkerIcon(
+                      icon: Icon(
+                        Icons.double_arrow,
+                        size: 48,
+                      ),
+                    ),
+                  ),
+                  roadConfiguration: RoadConfiguration(
+                    startIcon: const MarkerIcon(
+                      icon: Icon(
+                        Icons.person,
+                        size: 64,
+                        color: Colors.brown,
+                      ),
+                    ),
+                    roadColor: Colors.yellowAccent,
+                  ),
+                  markerOption: MarkerOption(
+                      defaultMarker: const MarkerIcon(
+                    icon: Icon(
+                      Icons.person_pin_circle,
+                      color: Colors.blue,
+                      size: 56,
+                    ),
+                  )),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,18 +159,18 @@ See beautiful Bali and help us keep it that way by joining this EcoTour of a Bal
 
   SizedBox buildUserReviewListView() {
     return SizedBox(
-              height: 300,
-              child: ListView.builder(
-                itemCount: UserReview.userReviews.length,
-                itemBuilder: ((context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: buildUserReviewItem(
-                          UserReview.userReviews[index].userName,
-                          UserReview.userReviews[index].imageUrl,
-                          UserReview.userReviews[index].reviewText),
-                    )),
-              ),
-            );
+      height: 300,
+      child: ListView.builder(
+        itemCount: UserReview.userReviews.length,
+        itemBuilder: ((context, index) => Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: buildUserReviewItem(
+                  UserReview.userReviews[index].userName,
+                  UserReview.userReviews[index].imageUrl,
+                  UserReview.userReviews[index].reviewText),
+            )),
+      ),
+    );
   }
 
   SizedBox buildUserReviewItem(
