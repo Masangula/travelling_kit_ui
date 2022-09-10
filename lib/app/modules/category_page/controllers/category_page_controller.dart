@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 class CategoryPageController extends GetxController {
-  //TODO: Implement CategoryPageController
 
   final count = 0.obs;
   @override

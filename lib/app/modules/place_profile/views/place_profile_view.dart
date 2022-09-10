@@ -15,7 +15,7 @@ class PlaceProfileView extends GetView<PlaceProfileController> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Kuta Beach'),
+        title:  Text(controller.place.name),
         actions: [
           IconButton(
             onPressed: null,
@@ -33,21 +33,7 @@ class PlaceProfileView extends GetView<PlaceProfileController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildSizedBox(30),
-              SizedBox(
-                height: Get.height * 0.4,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/images/kuta_beach.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              buildProfileCoverImageAndDetails(),
               buildSizedBox(30),
               buildHeadlines('What’s Included?'),
               buildSizedBox(24),
@@ -81,54 +67,8 @@ See beautiful Bali and help us keep it that way by joining this EcoTour of a Bal
               buildSizedBox(30),
               buildHeadlines('Location'),
               buildSizedBox(24),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: 160,
-                width: Get.width * 0.9,
-                child: OSMFlutter(
-                  controller: controller.mapController,
-                  trackMyPosition: false,
-                  initZoom: 12,
-                  minZoomLevel: 8,
-                  maxZoomLevel: 14,
-                  stepZoom: 1.0,
-                  userLocationMarker: UserLocationMaker(
-                    personMarker: const MarkerIcon(
-                      icon: Icon(
-                        Icons.location_history_rounded,
-                        color: ApplicationColors.redSecondaryColor,
-                        size: 48,
-                      ),
-                    ),
-                    directionArrowMarker: const MarkerIcon(
-                      icon: Icon(
-                        Icons.double_arrow,
-                        size: 48,
-                      ),
-                    ),
-                  ),
-                  roadConfiguration: RoadConfiguration(
-                    startIcon: const MarkerIcon(
-                      icon: Icon(
-                        Icons.person,
-                        size: 64,
-                        color: Colors.brown,
-                      ),
-                    ),
-                    roadColor: Colors.yellowAccent,
-                  ),
-                  markerOption: MarkerOption(
-                      defaultMarker: const MarkerIcon(
-                    icon: Icon(
-                      Icons.person_pin_circle,
-                      color: Colors.blue,
-                      size: 56,
-                    ),
-                  )),
-                ),
-              ),
+              buildMapView(),
+              buildSizedBox(30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -155,6 +95,171 @@ See beautiful Bali and help us keep it that way by joining this EcoTour of a Bal
         ),
       ),
     );
+  }
+
+  Container buildMapView() {
+    return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              height: 160,
+              width: Get.width * 0.9,
+              child: OSMFlutter(
+                controller: controller.mapController,
+                trackMyPosition: false,
+                initZoom: 12,
+                minZoomLevel: 8,
+                maxZoomLevel: 14,
+                stepZoom: 1.0,
+                userLocationMarker: UserLocationMaker(
+                  personMarker: const MarkerIcon(
+                    icon: Icon(
+                      Icons.location_history_rounded,
+                      color: ApplicationColors.redSecondaryColor,
+                      size: 48,
+                    ),
+                  ),
+                  directionArrowMarker: const MarkerIcon(
+                    icon: Icon(
+                      Icons.double_arrow,
+                      size: 48,
+                    ),
+                  ),
+                ),
+                roadConfiguration: RoadConfiguration(
+                  startIcon: const MarkerIcon(
+                    icon: Icon(
+                      Icons.person,
+                      size: 64,
+                      color: Colors.brown,
+                    ),
+                  ),
+                  roadColor: Colors.yellowAccent,
+                ),
+                markerOption: MarkerOption(
+                    defaultMarker: const MarkerIcon(
+                  icon: Icon(
+                    Icons.person_pin_circle,
+                    color: Colors.blue,
+                    size: 56,
+                  ),
+                )),
+              ),
+            );
+  }
+
+  SizedBox buildProfileCoverImageAndDetails() {
+    return SizedBox(
+              height: Get.height * 0.4,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      controller.place.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color:
+                          ApplicationColors.blackWordsColor.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  Positioned(
+                    top: 24,
+                    right: 24,
+                    left: 24,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        IconButton(
+                          onPressed: null,
+                          icon: Icon(
+                            Icons.arrow_upward,
+                            size: 30,
+                            color: ApplicationColors.whiteBackgroundColor,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: null,
+                          icon: Icon(
+                            Icons.verified,
+                            color: ApplicationColors.orangePrimaryColor,
+                            size: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: 24,
+                    bottom: 24,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          controller.place.name,
+                          style: Get.theme.textTheme.headline2!.copyWith(
+                              color: ApplicationColors.whiteBackgroundColor),
+                        ),
+                        buildSizedBox(5),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_outlined,
+                              color: ApplicationColors.whiteBackgroundColor,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Bali, Indonesia',
+                              style: Get.theme.textTheme.caption!.copyWith(
+                                fontSize: 16,
+                                color: ApplicationColors.whiteBackgroundColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        buildSizedBox(5),
+                        Row(
+                          children: [
+                            Text(
+                              '100+',
+                              style: Get.theme.textTheme.bodyText1!.copyWith(
+                                color: ApplicationColors.whiteBackgroundColor,
+                              ),
+                            ),
+                            Text(
+                              ' people have explored',
+                              style: Get.theme.textTheme.caption!.copyWith(
+                                color: ApplicationColors.whiteBackgroundColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            buildTotalStarRating(),
+                            Text(
+                              '4,9',
+                              style: Get.theme.textTheme.bodyText1!.copyWith(
+                                color: ApplicationColors.whiteBackgroundColor,
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
   }
 
   SizedBox buildUserReviewListView() {

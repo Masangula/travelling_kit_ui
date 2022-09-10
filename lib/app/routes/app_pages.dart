@@ -12,18 +12,20 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PLACE_PROFILE;
+  static const INITIAL = Routes.CATEGORY_PAGE;
 
   static final routes = [
     GetPage(
       name: _Paths.CATEGORY_PAGE,
       page: () => const CategoryPageView(),
       binding: CategoryPageBinding(),
+      transition: Transition.rightToLeft
     ),
     GetPage(
       name: _Paths.PLACE_PROFILE,
       page: () => const PlaceProfileView(),
       binding: PlaceProfileBinding(),
+      transition: Transition.rightToLeft
     ),
   ];
 }

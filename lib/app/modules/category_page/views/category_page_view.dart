@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:travelling_kit_ui/app/colors/application_colors.dart';
 import 'package:travelling_kit_ui/app/modules/category_page/views/category_model.dart';
 import 'package:travelling_kit_ui/app/modules/category_page/views/place_to_be_visited_model.dart';
+import 'package:travelling_kit_ui/app/routes/app_pages.dart';
 
 import '../controllers/category_page_controller.dart';
 
@@ -24,63 +25,68 @@ class CategoryPageView extends GetView<CategoryPageController> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextField(
-                style: Get.theme.textTheme.caption,
-                decoration: InputDecoration(
-                  fillColor: ApplicationColors.textfieldBackgroundColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  hintText: 'Search destination',
-                  hintStyle: Get.theme.textTheme.caption!.copyWith(fontSize: 16),
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Get.theme.colorScheme.onSurface,
-                    size: 24,
-                  ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 24,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              style: Get.theme.textTheme.caption,
+              decoration: InputDecoration(
+                fillColor: ApplicationColors.textfieldBackgroundColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                hintText: 'Search destination',
+                hintStyle:
+                    Get.theme.textTheme.caption!.copyWith(fontSize: 16),
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: Get.theme.colorScheme.onSurface,
+                  size: 24,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: SizedBox(
+              height: 56,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: Category.categoriesList.length,
+                itemBuilder: (context, index) {
+                  Category category = Category.categoriesList[index];
+                  return buildCategoryItem(
+                    category.categoryName,
+                    category.imageUrl,
+                  );
+                },
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: SizedBox(
-                height: 56,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: Category.categoriesList.length,
+          ),
+          const SizedBox(height: 24,),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: Place.listOfPlaceToBeVisited.length,
                   itemBuilder: (context, index) {
-                    Category category = Category.categoriesList[index];
-                    return buildCategoryItem(
-                      category.categoryName,
-                      category.imageUrl,
+                    Place place = Place.listOfPlaceToBeVisited[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.PLACE_PROFILE, arguments: place);
+                      },
+                      child: buildVisitingPlaceIListItem(
+                          place.name, place.description, place.imageUrl),
                     );
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: Place.listOfPlaceToBeVisited.length,
-                    itemBuilder: (context, index) {
-                      Place place = Place.listOfPlaceToBeVisited[index];
-                      return buildVisitingPlaceIListItem(
-                          place.name, place.description, place.imageUrl);
-                    }))
-          ],
-        ),
+                  }))
+        ],
       ),
     );
   }
@@ -94,7 +100,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
       ),
       child: Container(
         height: 155,
-        width: Get.width*0.9,
+        width: Get.width * 0.9,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

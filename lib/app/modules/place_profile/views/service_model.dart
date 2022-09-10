@@ -19,4 +19,12 @@ class Service {
     'assets/images/kuta_beach_2.png',
     'assets/images/kuta_beach_3.png',
   ];
+
+  static const listOfVisitors = [
+    'assets/images/user_1.png',
+    'assets/images/user_2.png',
+    'assets/images/user_3.png',
+    'assets/images/user_4.png',
+    'assets/images/user_5.png',
+  ];
 }

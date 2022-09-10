@@ -124,7 +124,7 @@ color:lightThemeColorScheme.onSurface,
         color:darkThemeColorScheme.onSurface,
       ),
       headline6: const TextStyle(
-        fontFamily: 'Urbanist',
+        fontFamily: 'Urbanist', 
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),

@@ -1,8 +1,11 @@
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
+import 'package:travelling_kit_ui/app/modules/category_page/views/place_to_be_visited_model.dart';
 
 class PlaceProfileController extends GetxController {
   late MapController mapController;
+  var rightPadding = 0.0;
+  late Place place;
   @override
   void onInit() {
     super.onInit();
@@ -16,6 +19,8 @@ class PlaceProfileController extends GetxController {
         west: 5.9559113,
       ),
     );
+    rightPadding = 70;
+    place = Get.arguments;
   }
 
   @override
@@ -28,4 +33,6 @@ class PlaceProfileController extends GetxController {
     super.onClose();
     mapController.dispose();
   }
+
+  icrementpadding() => rightPadding + 5;
 }
